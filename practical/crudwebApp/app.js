@@ -42,6 +42,10 @@ app.use(bodyParser.json())
 var expressValidator = require('express-validator')
 app.use(expressValidator());
 
+
+//OVERRIDE
+var methodOverride = require('method-override')
+
 /**
  * import routes/index.js
  * import routes/users.js
@@ -49,6 +53,11 @@ app.use(expressValidator());
 //ROUTE AT THE BOTTOM
 var index = require('./routes/index');
 app.use('/', index);
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+
 app.listen(3000, function(){
     console.log('Server running at port 3000: http://localhost:3000')});
 
