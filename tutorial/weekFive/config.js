@@ -4,8 +4,10 @@ var config = {
         host:      'localhost',     // database host
         user:       'root',         // your database username
         password:   '',         // your database password
-        port:       3306,         // default MySQL port
-        db:       'dbtest'         // your database name
+        port:       5000,         // default MySQL port
+        db:        'dbtest',
+        socketPath: "/Applications/MAMP/tmp/mysql/mysql.sock"
+
     },
     server: {
         host: 'localhost',

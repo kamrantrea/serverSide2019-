@@ -1,4 +1,4 @@
-
+//routes
 
 //GET
 var express = require('express');
@@ -17,11 +17,15 @@ app.get("/about.html", function (req, res) {
     res.sendFile( __dirname + "/" + "about.html" );
 });
 
-//PORTFOLIO
-app.get("/portfolio.html", function (req, res) {
-    res.sendFile( __dirname + "/" + "about.html" );
+//SERVICES
+app.get("/services.html", function (req, res) {
+    res.sendFile( __dirname + "/" + "services.html" );
 });
 
+//BLOG
+app.get("/blog.html", function (req, res) {
+    res.sendFile( __dirname + "/" + "blog.html" );
+});
 //CONTACT
 app.get("/contact.html", function (req, res) {
     res.sendFile( __dirname + "/" + "contact.html" );
@@ -43,12 +47,7 @@ app.get('/process_get', function (req, res) {
 
 
 //POST
-var bodyParser = require('body-parser');
 
-// Create application/x-www-form-urlencoded parser
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
-app.use(express.static('public'));
 app.get('/contact.html', function (req, res) {
     res.sendFile( __dirname + "/" + " contact.html " );
 })
@@ -67,9 +66,3 @@ app.post('/process_post', urlencodedParser, function (req, res) {
 
 // SERVER
 
-var server = app.listen(8081, function () {
-    var host = server.address().address
-    var port = server.address().port
-
-    console.log("Example app listening at http://%s:%s", host, port)
-})
