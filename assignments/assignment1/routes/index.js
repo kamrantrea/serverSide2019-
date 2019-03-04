@@ -3,66 +3,113 @@
 //GET
 var express = require('express');
 var app = express();
-
 app.use(express.static('public'));
 
-//HOME
-app.get("/home.html", function (req, res) {
-    res.sendFile( __dirname + "/" + "home.html" );
+/* GET home page. */
+
+app.get('/', function(req, res) {
+    req.getConnection(function(error, connection) {
+        connection.query('SELECT * FROM pages WHERE id = 1', function (err, rows, fields) {
+            // if (err throw err
+            if (err) {
+                res.send(err);
+            }
+            else {
+                // res.send(rows);
+                res.render('index.ejs', {data: rows[0],page:'Home', menuId:'home'} )
+            }
+        })
+    });
+});
+
+/* GET about page. */
+app.get('/about', function(req, res) {
+    req.getConnection(function(error, connection) {
+        connection.query('SELECT * FROM pages WHERE id = 2', function (err, rows, fields) {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.render('about.ejs', {data: rows[0],page:'about', menuId:'about'} )
+            }
+        });
+    });
+
 });
 
 
-//ABOUT
-app.get("/about.html", function (req, res) {
-    res.sendFile( __dirname + "/" + "about.html" );
-});
+/* GET services page. */
+app.get('/services', function(req, res) {
+    req.getConnection(function(error, connection) {
+        connection.query('SELECT * FROM pages WHERE id = 3', function (err, rows, fields) {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.render('services.ejs', {data: rows[0],page:'services', menuId:'services'} )
+            }
+        });
+    });
 
-//SERVICES
-app.get("/services.html", function (req, res) {
-    res.sendFile( __dirname + "/" + "services.html" );
-});
-
-//BLOG
-app.get("/blog.html", function (req, res) {
-    res.sendFile( __dirname + "/" + "blog.html" );
-});
-//CONTACT
-app.get("/contact.html", function (req, res) {
-    res.sendFile( __dirname + "/" + "contact.html" );
 });
 
 
-//GET FOR CONTACT FORM
-app.get('/process_get', function (req, res) {
-    // Prepare output in JSON format
-    response = {
-        first_name:req.query.first_name,
-        last_name:req.query.last_name
-    };
-    console.log(response);
-    res.end(JSON.stringify(response));
-})
+/* GET blog page. */
+app.get('/blog', function(req, res) {
+    req.getConnection(function(error, connection) {
+        connection.query('SELECT * FROM pages WHERE id = 4', function (err, rows, fields) {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.render('blog.ejs', {data: rows[0],page:'blog', menuId:'blog'} )
+            }
+        });
+    });
+
+});
 
 
 
 
-//POST
+/* GET Contact page. */
+app.get('/contact', function(req, res) {
+    req.getConnection(function(error, connection) {
+        connection.query('SELECT * FROM pages WHERE id = 5', function (err, rows, fields) {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.render('contact.ejs', {data: rows[0],page:'contact', menuId:'contact'} )
+            }
+        });
+    });
 
-app.get('/contact.html', function (req, res) {
-    res.sendFile( __dirname + "/" + " contact.html " );
-})
-
-//POST FOR CONTACT FORM
-app.post('/process_post', urlencodedParser, function (req, res) {
-    // Prepare output in JSON format
-    response = {
-        first_name:req.body.first_name,
-        last_name:req.body.last_name
-    };
-    console.log(response);
-    res.end(JSON.stringify(response));
-})
+});
 
 
-// SERVER
+
+
+
+
+app.get('/', function(req, res) {
+    req.getConnection(function(error, connection) {
+        var title = "Kamran";
+        connection.query('SELECT * FROM title ', function (err, result) {
+            if (err) {
+                res.send(err);
+            }
+            else {
+                res.render('menu.ejs', {data: rows[0] ,title: title, menu: result });
+                console.log(result);
+            }
+        });
+    });
+
+});
+
+
+module.exports = app;
+
+
 
