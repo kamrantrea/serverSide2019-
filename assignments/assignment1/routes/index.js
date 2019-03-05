@@ -4,12 +4,13 @@
 var express = require('express');
 var app = express();
 app.use(express.static('public'));
-
+var title = "Kamran";
 /* GET home page. */
 
 app.get('/', function (req, res) {
 
     req.getConnection(function (error, connection) {
+
         connection.query('SELECT * FROM pages order by id', function (err, rows, fields) {
             // if (err throw err
             if (err) {
@@ -18,11 +19,12 @@ app.get('/', function (req, res) {
             else {
                 // res.send(rows);
                 let curMenu = null;
+                //filter is for getting a item what is fit with some condition.
                 rows.filter((item) => {
                     if(item.id == 1)
                 curMenu = item;
             })
-                res.render('index.ejs', { menus: rows, data: curMenu, page: 'Home', menuId: 'home' })
+                res.render('index.ejs', { menus: rows, data: curMenu, page: 'Home', menuId: 'home', title: title })
             }
         })
     });
@@ -39,11 +41,12 @@ app.get('/about', function (req, res) {
             }
             else {
                 let curMenu = null;
+                //filter is for getting a item what is fit with some condition.
                 rows.filter((item) => {
                     if(item.id == 2)
                 curMenu = item;
             })
-                res.render('about.ejs', { menus: rows, data: curMenu, page: 'about', menuId: 'about' })
+                res.render('about.ejs', { menus: rows, data: curMenu, page: 'about', menuId: 'about', title: title })
             }
         });
     });
@@ -60,11 +63,12 @@ app.get('/services', function (req, res) {
             }
             else {
                 let curMenu = null;
+                //filter is for getting a item what is fit with some condition.
                 rows.filter((item) => {
                     if(item.id == 3)
                 curMenu = item;
             })
-                res.render('services.ejs', { menus: rows, data: curMenu, page: 'services', menuId: 'services' })
+                res.render('services.ejs', { menus: rows, data: curMenu, page: 'services', menuId: 'services', title: title })
             }
         });
     });
@@ -81,11 +85,12 @@ app.get('/blog', function (req, res) {
             }
             else {
                 let curMenu = null;
+                //filter is for getting a item what is fit with some condition.
                 rows.filter((item) => {
                     if(item.id == 4)
                 curMenu = item;
             })
-                res.render('blog.ejs', { menus: rows, data: curMenu, page: 'blog', menuId: 'blog' })
+                res.render('blog.ejs', { menus: rows, data: curMenu, page: 'blog', menuId: 'blog', title: title })
             }
         });
     });
@@ -104,11 +109,12 @@ app.get('/contact', function (req, res) {
             }
             else {
                 let curMenu = null;
+                //filter is for getting a item what is fit with some condition.
                 rows.filter((item) => {
                     if(item.id == 5)
                 curMenu = item;
             })
-                res.render('contact.ejs', { menus: rows, data: curMenu, page: 'contact', menuId: 'contact' })
+                res.render('contact.ejs', { menus: rows, data: curMenu, page: 'contact', menuId: 'contact', title: title })
             }
         });
     });
