@@ -7,16 +7,22 @@ app.use(express.static('public'));
 
 /* GET home page. */
 
-app.get('/', function(req, res) {
-    req.getConnection(function(error, connection) {
-        connection.query('SELECT * FROM pages WHERE id = 1', function (err, rows, fields) {
+app.get('/', function (req, res) {
+
+    req.getConnection(function (error, connection) {
+        connection.query('SELECT * FROM pages order by id', function (err, rows, fields) {
             // if (err throw err
             if (err) {
                 res.send(err);
             }
             else {
                 // res.send(rows);
-                res.render('index.ejs', {data: rows[0],page:'Home', menuId:'home'} )
+                let curMenu = null;
+                rows.filter((item) => {
+                    if(item.id == 1)
+                curMenu = item;
+            })
+                res.render('index.ejs', { menus: rows, data: curMenu, page: 'Home', menuId: 'home' })
             }
         })
     });
@@ -24,14 +30,20 @@ app.get('/', function(req, res) {
 
 
 /* GET about page. */
-app.get('/about', function(req, res) {
-    req.getConnection(function(error, connection) {
-        connection.query('SELECT * FROM pages WHERE id = 2', function (err, rows, fields) {
+app.get('/about', function (req, res) {
+
+    req.getConnection(function (error, connection) {
+        connection.query('SELECT * FROM pages order by id', function (err, rows, fields) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('about.ejs', {data: rows[0],page:'about', menuId:'about'} )
+                let curMenu = null;
+                rows.filter((item) => {
+                    if(item.id == 2)
+                curMenu = item;
+            })
+                res.render('about.ejs', { menus: rows, data: curMenu, page: 'about', menuId: 'about' })
             }
         });
     });
@@ -40,14 +52,19 @@ app.get('/about', function(req, res) {
 
 
 /* GET services page. */
-app.get('/services', function(req, res) {
-    req.getConnection(function(error, connection) {
-        connection.query('SELECT * FROM pages WHERE id = 3', function (err, rows, fields) {
+app.get('/services', function (req, res) {
+    req.getConnection(function (error, connection) {
+        connection.query('SELECT * FROM pages order by id', function (err, rows, fields) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('services.ejs', {data: rows[0],page:'services', menuId:'services'} )
+                let curMenu = null;
+                rows.filter((item) => {
+                    if(item.id == 3)
+                curMenu = item;
+            })
+                res.render('services.ejs', { menus: rows, data: curMenu, page: 'services', menuId: 'services' })
             }
         });
     });
@@ -56,14 +73,19 @@ app.get('/services', function(req, res) {
 
 
 /* GET blog page. */
-app.get('/blog', function(req, res) {
-    req.getConnection(function(error, connection) {
-        connection.query('SELECT * FROM pages WHERE id = 4', function (err, rows, fields) {
+app.get('/blog', function (req, res) {
+    req.getConnection(function (error, connection) {
+        connection.query('SELECT * FROM pages order by id', function (err, rows, fields) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('blog.ejs', {data: rows[0],page:'blog', menuId:'blog'} )
+                let curMenu = null;
+                rows.filter((item) => {
+                    if(item.id == 4)
+                curMenu = item;
+            })
+                res.render('blog.ejs', { menus: rows, data: curMenu, page: 'blog', menuId: 'blog' })
             }
         });
     });
@@ -74,14 +96,19 @@ app.get('/blog', function(req, res) {
 
 
 /* GET Contact page. */
-app.get('/contact', function(req, res) {
-    req.getConnection(function(error, connection) {
-        connection.query('SELECT * FROM pages WHERE id = 5', function (err, rows, fields) {
+app.get('/contact', function (req, res) {
+    req.getConnection(function (error, connection) {
+        connection.query('SELECT * FROM pages order by id', function (err, rows, fields) {
             if (err) {
                 res.send(err);
             }
             else {
-                res.render('contact.ejs', {data: rows[0],page:'contact', menuId:'contact'} )
+                let curMenu = null;
+                rows.filter((item) => {
+                    if(item.id == 5)
+                curMenu = item;
+            })
+                res.render('contact.ejs', { menus: rows, data: curMenu, page: 'contact', menuId: 'contact' })
             }
         });
     });
