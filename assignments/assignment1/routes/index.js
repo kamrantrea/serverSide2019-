@@ -22,6 +22,7 @@ app.get('/', function(req, res) {
     });
 });
 
+
 /* GET about page. */
 app.get('/about', function(req, res) {
     req.getConnection(function(error, connection) {
@@ -89,24 +90,22 @@ app.get('/contact', function(req, res) {
 
 
 
-
-
-
-app.get('/', function(req, res) {
-    req.getConnection(function(error, connection) {
-        var title = "Kamran";
-        connection.query('SELECT * FROM title ', function (err, result) {
-            if (err) {
-                res.send(err);
-            }
-            else {
-                res.render('menu.ejs', {data: rows[0] ,title: title, menu: result });
-                console.log(result);
-            }
-        });
-    });
-
-});
+//
+// app.get('/', function(req, res) {
+//     req.getConnection(function(error, connection) {
+//         var title = "Kamran";
+//         connection.query('SELECT * FROM title ', function (err, result) {
+//             if (err) {
+//                 res.send(err);
+//             }
+//             else {
+//                 res.render('menu.ejs', {data: rows[0] ,title: title, menu: result });
+//                 console.log(result);
+//             }
+//         });
+//     });
+//
+// });
 
 
 module.exports = app;
